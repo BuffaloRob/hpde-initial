@@ -4,11 +4,21 @@ require 'pry'
 
 class Scraper
 
-  # def initialize
-  # end
+  def initialize
 
-  def self.scrap_map
+  end
 
+  def self.scrape_map(region)
+    dates = []
+    #replace address with argument
+    calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
+    #iterate over rows
+    calendar.css('table.em-calendar tbody tr').each do |row|
+      #iterate over days
+      row.css('td.eventful a').each do |day|
+        dates << day.text
+      end
+    end
   end
 
   def self.scrape_region
@@ -19,9 +29,9 @@ class Scraper
         regions << map.css('.map-text').text
       end
     end
-    puts "Choose your region"
-    puts "#{regions.each_with_index}"
-    region_choice = gets.strip
+    # puts "Choose your region"
+    # puts "#{regions.each_with_index}"
+    # region_choice = gets.strip
 
     #Hard code this instead. Regions won't change. have cli list regions and use if/else statement to link to region chosen, then start scraping.
 
