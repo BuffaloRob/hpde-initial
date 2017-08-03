@@ -8,7 +8,7 @@ class Scraper
 
   end
 
-  def self.scrape_map(region)
+  def self.scrape_calendar(region)
     dates = []
     #replace address with argument
     calendar = Nokogiri::HTML(open("http://hpdejunkie.com/east/"))
@@ -22,6 +22,7 @@ class Scraper
   end
 
   def self.scrape_region
+#Hard code this instead. Regions won't change. have cli list regions and use if/else statement to link to chosen region, then start scraping.    
     regions = []
     home_page = Nokogiri::HTML(open("http://hpdejunkie.com/"))
     home_page.css('div.columns.three').each do |choose_region|
@@ -32,9 +33,6 @@ class Scraper
     # puts "Choose your region"
     # puts "#{regions.each_with_index}"
     # region_choice = gets.strip
-
-    #Hard code this instead. Regions won't change. have cli list regions and use if/else statement to link to region chosen, then start scraping.
-
   end
 
   scraper = Scraper.new
